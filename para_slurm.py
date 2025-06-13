@@ -4,7 +4,7 @@ import time
 import getpass
 from pathlib import Path
 from argparse import ArgumentParser
-from utils import run_subprocess, check_job_failed
+from utils import run_subprocess, check_job_failed, parse_job_status_string
 from typing import List, Dict
 import warnings
 
@@ -57,7 +57,19 @@ class Job(object):
             for job in FI:
                 job = job.rstrip("\n")
                 run_subprocess(f'scancel {job}')
-        
+
+    def action_chill(self):
+        ''' checks the jobs that are in pending state and runs cancel on these jobs '''
+
+        job_ids_file = self.__base_dir / "jobs_ids.txt"
+        with open(job_ids_file, 'r') as FI:
+            for job in FI:
+                job = job.rstrip("\n")
+                job_status = parse_job_status_string(run_subprocess(f'squeue -u {JobSubmit.username} -j {job}', True))
+
+                if job_status == "PD":
+                    run_subprocess(f'scancel {job}')
+
     def main(self) -> None:
         
         if self.__task_name == "clean":
@@ -66,6 +78,8 @@ class Job(object):
             self.__action_crashed()
         elif self.__task_name == "stop":
             self.__action_stop()
+        elif self.__task_name == "":
+            self.__action_chill()
 
 class JobSubmit(object):
     ''' the class that deals with a job submission '''
@@ -126,16 +140,6 @@ class JobSubmit(object):
                 FO.write(f'{job_identifier}\n')
 
         return jobs_ids_dict
-    
-    @staticmethod
-    def parse_job_status_string(job_status_string):
-        ''' parse the output of squeue and return the job's status '''
-
-        status_string_list = job_status_string.split('\n')
-        if len(status_string_list) == 2:
-            status_relevant_fields_list = status_string_list[1].split()
-            return status_relevant_fields_list[4]
-        return ''
 
     def __check_jobs_status(self, jobs_ids_dict):
 
@@ -147,7 +151,7 @@ class JobSubmit(object):
             failed, finished, running, pending = 0, 0, 0, 0
 
             for j in all_jobs_list:
-                job_status = JobSubmit.parse_job_status_string(run_subprocess(f'squeue -u {JobSubmit.username} -j {j}', True))
+                job_status = parse_job_status_string(run_subprocess(f'squeue -u {JobSubmit.username} -j {j}', True))
 
                 if job_status == '':
                     ct = jobs_ids_dict[j]
