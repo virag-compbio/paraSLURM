@@ -91,4 +91,5 @@ Contact: virag.compbiologist@gmail.com
 ### Contributions
 Feel free to open issues or submit pull requests if you'd like to contribute or suggest improvements.
 
-
+### TODO  
+Add other arguments namely: push_crashed, check, wait, time and chill
