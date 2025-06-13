@@ -1,7 +1,7 @@
 # paraSLURM
 
 **paraSLURM** is a lightweight command-line tool that simplifies the submission and management of jobs on the [CMCB's](https://www.tu-dresden.de/cmcb) HPC cluster, which uses **SLURM** as its workload manager. It is designed to make high-throughput job handling more user-friendly by providing convenient commands to **push**, **stop**, **clean**, or investigate **crashed** jobs.
-
+   
 
 ---
 
@@ -20,7 +20,7 @@
 usage: para_slurm.py [-h] [-f JOBS_FILE] [-n NODES] [-c CPU] [-t TIME] [-m MEMORY] {stop,clean,crashed,push}jobs_name
 ```
 
-
+   
 
 ### Mandatory arguments
 
@@ -37,7 +37,7 @@ usage: para_slurm.py [-h] [-f JOBS_FILE] [-n NODES] [-c CPU] [-t TIME] [-m MEMOR
 
 - jobs_name - A name used to identify this batch of jobs
 
-
+   
 
 ### Optional arguments
 
@@ -50,7 +50,7 @@ usage: para_slurm.py [-h] [-f JOBS_FILE] [-n NODES] [-c CPU] [-t TIME] [-m MEMOR
 | `-t TIME`, `--time TIME`           | Time (in minutes) requested per job               |
 | `-m MEMORY`, `--memory MEMORY`     | Memory requested per CPU (in GB)                  |
 
-
+   
 
 ### Examples
 
@@ -58,34 +58,34 @@ usage: para_slurm.py [-h] [-f JOBS_FILE] [-n NODES] [-c CPU] [-t TIME] [-m MEMOR
 ```
 python para_slurm.py push my_analysis_batch -f jobs.txt -n 1 -c 4 -t 120 -m 8
 ```
-
+   
 
 #### Stop all running jobs from the batch
 ```
 python para_slurm.py stop my_analysis_batch
 ```
-
+   
 
 #### Clean up job files
 ```
 python para_slurm.py clean my_analysis_batch
 ```
-
+   
 
 #### List crashed jobs from the batch
 ```
 python para_slurm.py crashed my_analysis_batch
 ```
-
+   
 
 ### Requirements
 - python 3.x
 - Access to a SLURM-based HPC cluster
-- SLURM installed and configured in your environment
-
+- SLURM installed and configured in your environment   
+   
 
 ### Author
-Developed by Virag Sharma
+Developed by Virag Sharma  
 Contact: virag.compbiologist@gmail.com
 
 ### Contributions
