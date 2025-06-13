@@ -19,21 +19,22 @@
 usage: para_slurm.py [-h] [-f JOBS_FILE] [-n NODES] [-c CPU] [-t TIME] [-m MEMORY] {stop,clean,crashed,push}jobs_name
 ```
 
-## Mandatory arguments
+### Mandatory arguments
 
 | Argument                    | Description          |
 | --------------------------- | -------------------- |
 | `{stop,clean,crashed,push}` | The task to perform: |
+| `jobs_name`                 | A name/identifier for a set of jobs |
 
 
-push: Submit jobs  
-stop: Cancel running jobs  
-clean: Remove temporary job files  
-crashed: List jobs that failed or crashed  
+- push: Submit jobs  
+- stop: Cancel running jobs  
+- clean: Remove temporary job files  
+- crashed: List jobs that failed or crashed  
 
 jobs_name - A name used to identify this batch of jobs
 
-## Optional arguments
+### Optional arguments
 
 | Argument                           | Description                                       |
 | ---------------------------------- | ------------------------------------------------- |
@@ -44,7 +45,7 @@ jobs_name - A name used to identify this batch of jobs
 | `-t TIME`, `--time TIME`           | Time (in minutes) requested per job               |
 | `-m MEMORY`, `--memory MEMORY`     | Memory requested per CPU (in GB)                  |
 
-## Examples
+### Examples
 
 #### Submit a batch of jobs listed in jobs.txt with specific resource requirements
 ```
@@ -65,3 +66,17 @@ python para_slurm.py clean my_analysis_batch
 ```
 python para_slurm.py crashed my_analysis_batch
 ```
+
+### Requirements
+- python 3.x
+- Access to a SLURM-based HPC cluster
+- SLURM installed and configured in your environment
+
+### Author
+Developed by Virag Sharma
+Contact: virag.compbiologist@gmail.com
+
+### Contributions
+Feel free to open issues or submit pull requests if you'd like to contribute or suggest improvements.
+
+
