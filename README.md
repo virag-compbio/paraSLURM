@@ -26,10 +26,10 @@ usage: para_slurm.py [-h] [-f JOBS_FILE] [-n NODES] [-c CPU] [-t TIME] [-m MEMOR
 | `{stop,clean,crashed,push}` | The task to perform: |
 
 
-push: Submit jobs 
-stop: Cancel running jobs 
-clean: Remove temporary job files 
-crashed: List jobs that failed or crashed 
+push: Submit jobs  
+stop: Cancel running jobs  
+clean: Remove temporary job files  
+crashed: List jobs that failed or crashed  
 
 jobs_name - A name used to identify this batch of jobs
 
